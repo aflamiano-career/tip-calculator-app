@@ -1,4 +1,4 @@
-# Time Tracking Dashboard
+# Tip Calculator App
 
 A responsive calculator for computing tips built with **React**, **Vite**, and **Tailwind CSS**.  
 This project is a solution to the [Frontend Mentor Tip Calculator App Challenge](https://www.frontendmentor.io/challenges/tip-calculator-app-ugJNGbJUX).
