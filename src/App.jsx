@@ -50,10 +50,16 @@ function App() {
         </header>
         <section className="bg-white lg:grid lg:grid-cols-2 lg:gap-12 p-8 sm:px-20 sm:py-14 rounded-t-3xl sm:rounded-b-3xl max-w-xl lg:max-w-5xl h-full">
           <form>
-            <label htmlFor="bill" className="font-bold text-Grey500">
-              Bill
-            </label>
-            {errors.bill && <span>{errors.bill.message}</span>}
+            <div className="flex justify-between">
+              <label htmlFor="bill" className="font-bold text-Grey500">
+                Bill
+              </label>
+              {errors.bill && (
+                <span className="font-bold text-red-400 text-right">
+                  {errors.bill.message}
+                </span>
+              )}
+            </div>
             <div className="relative mt-2 mb-8">
               <img
                 src="images/icon-dollar.svg"
@@ -65,7 +71,6 @@ function App() {
                 className="bg-Grey50 text-right px-4 py-2 w-full font-bold text-2xl text-Green900"
                 onFocus={(e) => e.target.select()}
                 {...register("bill", {
-                  required: "Please enter a value",
                   min: {
                     value: 0,
                     message: "Must not be negative",
@@ -149,33 +154,37 @@ function App() {
               />
             </div>
           </form>
-          <div className="rounded-2xl grid grid-cols-5 p-6 sm:p-10 gap-6 font-bold bg-Green900 text-white">
-            <div className="col-span-2">
-              <p>Tip Amount</p>
-              <p className="text-sm text-Grey400">/ person</p>
+          <div className="flex flex-col rounded-2xl p-6 sm:p-10 gap-6 font-bold bg-Green900 text-white">
+            <div className="flex justify-between overflow-x-auto overflow-y-hidden">
+              <div className="mr-2">
+                <p>Tip Amount</p>
+                <p className="text-sm text-Grey400">/ person</p>
+              </div>
+              <div className="text-right text-3xl sm:text-5xl text-Green400">
+                $
+                {!errors.bill && !errors.people && !errors.custom
+                  ? tipPerPerson.toFixed(2)
+                  : "0.00"}
+              </div>
             </div>
-            <div className="col-span-3 text-right overflow-auto text-wrap text-3xl sm:text-5xl text-Green400">
-              $
-              {!errors.bill && !errors.people && !errors.custom
-                ? tipPerPerson.toFixed(2)
-                : 0}
-            </div>
-            <div className="col-span-2">
-              <p>Total</p>
-              <p className="text-sm text-Grey400">/ person</p>
-            </div>
-            <div className="col-span-3 text-right overflow-auto text-wrap text-3xl sm:text-5xl text-Green400">
-              $
-              {!errors.bill && !errors.people && !errors.custom
-                ? totalAmount.toFixed(2)
-                : 0}
+            <div className="flex justify-between overflow-x-auto overflow-y-hidden">
+              <div className="mr-2">
+                <p>Total</p>
+                <p className="text-sm text-Grey400">/ person</p>
+              </div>
+              <div className="text-right text-3xl sm:text-5xl text-Green400">
+                $
+                {!errors.bill && !errors.people && !errors.custom
+                  ? totalAmount.toFixed(2)
+                  : "0.00"}
+              </div>
             </div>
             <button
               type="button"
               onClick={() => {
                 reset();
               }}
-              className="col-span-5 self-end text-2xl text-Green900 rounded-sm h-12 bg-Green400 uppercase"
+              className="mt-auto text-2xl text-Green900 rounded-sm h-12 bg-Green400 uppercase w-full"
             >
               Reset
             </button>
